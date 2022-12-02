@@ -33,7 +33,7 @@ while (!feof(STDIN)) {
             'Z' => 3, // Nożyce
         },
     };
-    echo "przeciwnik: {$opponent} my: {$our}\n";
+//    echo "przeciwnik: {$opponent} my: {$our}\n";
 }
 
 echo "wynik: {$totalScore}\n";

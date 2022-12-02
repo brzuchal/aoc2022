@@ -4,36 +4,41 @@ $totalScore = 0;
 while (!feof(STDIN)) {
     [$opponent, $our] = fgetcsv(STDIN, separator: ' ') ?? [];
     if (empty($opponent)) break;
-//    if ($our === 'X') {
-//        $totalScore += 1;
-//    } elseif ($our === 'Y') {
-//        $totalScore += 2;
-//    } elseif ($our === 'Z') {
-//        $totalScore += 3;
-//    }
-    $totalScore += match ($our) {
-        'X' => 1,
-        'Y' => 2,
-        'Z' => 3,
+    $totalScore += match ($opponent) {
+        'A' => match ($our) { // Kamień
+            'X' => 3, // Przegrana nożycami
+            'Y' => 1, // Remis kamieniem
+            'Z' => 2, // Wygrana papierem
+        },
+        'B' => match ($our) { // Papier
+            'X' => 1, // Przegrana kamieniem
+            'Y' => 2, // Remis papierem
+            'Z' => 3, // Wygrana nożycami
+        },
+        'C' => match ($our) { // Nożyce
+            'X' => 2, // Przegrana papierem
+            'Y' => 3, // Remis nożycami
+            'Z' => 1, // Wygrana kamieniem
+        },
     };
     $totalScore += match ($opponent) {
         'A' => match ($our) { // Kamień
-            'X' => 3, // Kamień
-            'Y' => 6, // Papier
-            'Z' => 0, // Nożyce
+            'X' => 0, // Przegrana
+            'Y' => 3, // Remis
+            'Z' => 6, // Wygrana
         },
         'B' => match ($our) { // Papier
-            'X' => 0, // Kamień
-            'Y' => 3, // Papier
-            'Z' => 6, // Nożyce
+            'X' => 0, // Przegrana
+            'Y' => 3, // Remis
+            'Z' => 6, // Wygrana
         },
         'C' => match ($our) { // Nożyce
-            'X' => 6, // Kamień
-            'Y' => 0, // Papier
-            'Z' => 3, // Nożyce
+            'X' => 0, // Przegrana
+            'Y' => 3, // Remis
+            'Z' => 6, // Wygrana
         },
     };
-    echo "przeciwnik: {$opponent} my: {$our}\n";
+//    echo "przeciwnik: {$opponent} my: {$our}\n";
 }
 
 echo "wynik: {$totalScore}\n";
